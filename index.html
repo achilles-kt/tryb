@@ -3,9 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Tryb — Find your vibe. A new way to meet people who share your interests through games, communities, and conversations." />
-  <title>Tryb — Find your Tryb</title>
+  <title>Tryb — Meet. Play. Belong.</title>
+  <meta name="description" content="Tryb helps people form real communities through shared activities — not profiles. Founded by IIT Madras alumnus Akhil KT, Tryb reimagines how we meet, play, and belong." />
+
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:title" content="Tryb — Meet. Play. Belong.">
+  <meta property="og:description" content="A community platform built around shared activities. Founded by Akhil KT, IIT Madras alumnus.">
+  <meta property="og:image" content="https://betryb.com/176111933633483512.png">
+  <meta property="og:url" content="https://betryb.com/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
+
   <style>
     /* -----------------------------
        GLOBAL STYLES
@@ -38,18 +51,9 @@
     }
 
     @keyframes floatLogo {
-      0% {
-        transform: translateY(0px) scale(1);
-        filter: drop-shadow(0 0 10px rgba(140,82,255,0.4));
-      }
-      50% {
-        transform: translateY(-10px) scale(1.02);
-        filter: drop-shadow(0 0 25px rgba(140,82,255,0.6));
-      }
-      100% {
-        transform: translateY(0px) scale(1);
-        filter: drop-shadow(0 0 10px rgba(140,82,255,0.4));
-      }
+      0% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px rgba(140,82,255,0.4)); }
+      50% { transform: translateY(-10px) scale(1.02); filter: drop-shadow(0 0 25px rgba(140,82,255,0.6)); }
+      100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px rgba(140,82,255,0.4)); }
     }
 
     header h1 {
@@ -100,151 +104,165 @@
       margin: 0 auto;
       position: relative;
       z-index: 2;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s forwards;
-    }
-
-    section:nth-child(1) { animation-delay: 0.3s; }
-    section:nth-child(2) { animation-delay: 0.5s; }
-    section:nth-child(3) { animation-delay: 0.7s; }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
     }
 
     section h2 {
       font-family: 'Manrope', sans-serif;
       font-size: 2rem;
       color: #FFFFFF;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     section p {
       font-size: 1.1rem;
       color: #BFBFDD;
       line-height: 1.6;
+      margin-bottom: 15px;
     }
 
-
-
-
-.founder {
-  background: #F5F5F7;
-  color: #0C0837;
-  border-radius: 20px;
-  padding: 80px 20px;
-  margin-top: 80px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-}
-
-.founder-photo-wrapper {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 30px;
-}
-
-.founder img {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid transparent;
-  background: linear-gradient(135deg, #8C52FF, #FF8E6E);
-  background-origin: border-box;
-  z-index: 2;
-  position: relative;
-  box-shadow: 0 0 25px rgba(140, 82, 255, 0.3);
-}
-
-.photo-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(140,82,255,0.25), transparent 70%);
-  animation: glowPulse 4s ease-in-out infinite;
-  z-index: 1;
-  filter: blur(30px);
-}
-
-@keyframes glowPulse {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.15);
-    opacity: 1;
-  }
-}
-
-.founder h2 {
-  font-family: 'Manrope', sans-serif;
-  font-size: 2rem;
-  color: #1A144B; /* Increased contrast */
-  margin-bottom: 20px;
-  font-weight: 700;
-}
-
-.founder p {
-  font-size: 1.1rem;
-  color: #3A3A4A; /* Darker text for contrast */
-  line-height: 1.6;
-  max-width: 700px;
-  margin: 0 auto 15px;
-}
-
-
-
-
-
-
-
-    .ambassador {
-      background: linear-gradient(135deg, #00C2FF, #8C52FF);
+    /* Founder Section */
+    .founder {
+      background: #F5F5F7;
+      color: #0C0837;
       border-radius: 20px;
-      padding: 80px 20px;
+      padding: 90px 20px;
       margin-top: 80px;
-    }
-
-    .ambassador h2, .ambassador p {
-      color: white;
-    }
-
-    footer {
       text-align: center;
-      padding: 40px 20px;
-      color: #888;
-      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    }
+
+    .founder h2 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2.2rem;
+      color: #1A144B;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .founder p {
+      font-size: 1.1rem;
+      color: #3A3A4A;
+      line-height: 1.7;
+      max-width: 780px;
+      margin: 0 auto 20px;
+    }
+
+    .founder-photo-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+
+    .founder img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid transparent;
+      background: linear-gradient(135deg, #8C52FF, #FF8E6E);
+      background-origin: border-box;
       z-index: 2;
       position: relative;
+      box-shadow: 0 0 25px rgba(140, 82, 255, 0.3);
     }
 
-    a {
-      color: #FF8E6E;
+    .photo-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(140,82,255,0.25), transparent 70%);
+      animation: glowPulse 4s ease-in-out infinite;
+      z-index: 1;
+      filter: blur(30px);
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    }
+
+    .founder-links {
+      margin-top: 30px;
+      font-weight: 600;
+    }
+
+    .founder-links a {
+      color: #8C52FF;
       text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .founder-links a:hover { color: #FF8E6E; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      color: #BFBFDD;
+      font-size: 0.95rem;
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      z-index: 2;
+    }
+
+    footer p {
+      margin-bottom: 20px;
+      font-family: 'Manrope', sans-serif;
       font-weight: 500;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
     }
 
-    /* -----------------------------
-       BACKGROUND ANIMATED RINGS
-    ------------------------------ */
+    .footer-icon-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #FF8E6E;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .footer-icon-link:hover {
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    .footer-icon {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background: linear-gradient(90deg, #8C52FF, #FF8E6E);
+      opacity: 0.5;
+    }
+
+    /* Animated Background */
     .background {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       overflow: hidden;
       z-index: 0;
     }
@@ -257,26 +275,9 @@
       animation: drift 20s infinite ease-in-out alternate;
     }
 
-    .ring:nth-child(1) {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, #8C52FF, transparent 70%);
-      top: 10%; left: -15%;
-      animation-delay: 0s;
-    }
-
-    .ring:nth-child(2) {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, #FF8E6E, transparent 70%);
-      top: 50%; left: 70%;
-      animation-delay: 4s;
-    }
-
-    .ring:nth-child(3) {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, #00C2FF, transparent 70%);
-      top: 30%; left: 30%;
-      animation-delay: 7s;
-    }
+    .ring:nth-child(1) { width: 500px; height: 500px; background: radial-gradient(circle, #8C52FF, transparent 70%); top: 10%; left: -15%; animation-delay: 0s; }
+    .ring:nth-child(2) { width: 400px; height: 400px; background: radial-gradient(circle, #FF8E6E, transparent 70%); top: 50%; left: 70%; animation-delay: 4s; }
+    .ring:nth-child(3) { width: 300px; height: 300px; background: radial-gradient(circle, #00C2FF, transparent 70%); top: 30%; left: 30%; animation-delay: 7s; }
 
     @keyframes drift {
       0% { transform: translate(0, 0) scale(1); }
@@ -284,72 +285,62 @@
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
-      .cta button {
-        padding: 12px 28px;
-        font-size: 1rem;
-      }
-      section h2 {
-        font-size: 1.6rem;
-      }
+      header h1 { font-size: 2.2rem; }
+      .cta button { padding: 12px 28px; font-size: 1rem; }
+      section h2 { font-size: 1.6rem; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Background Animated Rings -->
+  <!-- Animated Background -->
   <div class="background">
     <div class="ring"></div>
     <div class="ring"></div>
     <div class="ring"></div>
   </div>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <header>
     <img src="176111933633483512.png" alt="Tryb Logo">
     <h1>Find your Tryb.</h1>
     <p>Coming Soon — A new way to connect with people who vibe like you.</p>
   </header>
 
-  <!-- Waitlist CTA -->
   <div class="cta">
-    <button onclick="window.location.href='https://forms.gle/yourwaitlistform'">Join the Waitlist</button>
+    <button onclick="window.location.href='https://form.typeform.com/to/kkKh81V1'">Join the Waitlist</button>
   </div>
 
   <!-- About Tryb -->
   <section>
     <h2>What is Tryb?</h2>
-    <p>
-      Tryb helps you find people who share your vibe — through games, events, and communities that bring the fun back into meeting new people.
-      It’s not about endless scrolling, it’s about genuine connections.
-    </p>
+    <p>Tryb helps people form real communities through shared activities — not profiles. It’s built around the idea that belonging comes from participation, not swiping or scrolling.</p>
+    <p>Every connection on Tryb starts with something to <strong>do</strong> — from games and creative workshops to casual hangouts. Short, low-pressure activities evolve into lasting communities with rituals and identity.</p>
+    <p><strong>Meet. Play. Belong.</strong> That’s the Tryb loop — discover people through activities, participate together, and stay connected through tribes that feel real.</p>
+    <p>At the intersection of social, gaming, and discovery, Tryb reimagines digital connection for a generation that values experiences over endless feeds.</p>
   </section>
 
   <!-- Founder Section -->
- <section class="founder">
-  <div class="founder-photo-wrapper">
-    <img src="akhil.png" alt="Akhil KT">
-    <div class="photo-glow"></div>
-  </div>
-  <h2>Meet the Founder</h2>
-  <p>
-    Akhil KT is a product leader who’s helped scale gaming and fintech platforms to millions of users.
-    Now, he’s building Tryb — a social experience that feels like hanging out, not logging in.
-  </p>
-  <p><a href="https://www.linkedin.com/in/akhil-kt-41bbba3b/">Connect on LinkedIn</a></p>
-</section>
+  <section class="founder">
+    <div class="founder-photo-wrapper">
+      <img src="akhil.png" alt="Akhil KT">
+      <div class="photo-glow"></div>
+    </div>
 
+    <h2>Meet the Founder</h2>
+    <p><strong>Akhil KT</strong>, Founder & CEO of Tryb, is a dual-degree graduate from <strong>IIT Madras</strong> with nearly a decade of experience building and scaling digital products across gaming, fintech, and B2B commerce.</p>
+    <p>Before founding Tryb, he led product strategy and growth at <strong>Gameberry Labs</strong> (creators of Ludo Star and Jackaroo), <strong>Bzaar.com</strong>, and <strong>Thrive</strong>, helping products reach millions of users globally.</p>
+    <p>Akhil’s mission with Tryb is simple — to make online interactions feel genuine again, built around play, discovery, and belonging.</p>
+    <p class="founder-links">
+      <a href="https://www.linkedin.com/in/akhil-kt-41bbba3b/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a> |
+      <a href="mailto:akhil@betryb.com">akhil@betryb.com</a>
+    </p>
+  </section>
 
   <!-- Ambassador Section -->
   <section class="ambassador">
     <h2>Become a Tryb Campus Ambassador</h2>
-    <p>
-      If you love building communities and want to be at the heart of something new,
-      join the Tryb Campus Ambassador Program. Get exclusive perks, early access,
-      and be the face of Tryb at your college.
-    </p>
+    <p>If you love building communities and want to be at the heart of something new, join the Tryb Campus Ambassador Program. Get exclusive perks, early access, and be the face of Tryb at your college.</p>
     <div class="cta">
       <button onclick="window.location.href='https://form.typeform.com/to/M17a3VY4'">Apply Now</button>
     </div>
@@ -358,8 +349,22 @@
   <!-- Footer -->
   <footer>
     <p>© 2025 Tryb. All rights reserved.</p>
-    <p>Contact us: <a href="mailto:hey@trybonline.com">hey@trybonline.com</a></p>
-  </footer>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/_betryb/" target="_blank" rel="noopener noreferrer" class="footer-icon-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="footer-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9A4.5 4.5 0 0 1 16.5 21h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 7.5h.008v.008H16.5V7.5zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
+        </svg>
+        <span>@_betryb</span>
+      </a>
 
+      <a href="mailto:akhil@betryb.com" class="footer-icon-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="footer-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25H4.5a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0-9.75 6.75L2.25 6.75" />
+        </svg>
+        <span>akhil@betryb.com</span>
+      </a>
+    </div>
+  </footer>
 </body>
 </html>
