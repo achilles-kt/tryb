@@ -5,18 +5,39 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const coarse = matchMedia('(max-width: 760px), (pointer: coarse)').matches;
+
+  // Start/stop work as `el` enters/leaves the viewport (and when the tab is hidden).
+  function whileVisible(el, start, stop) {
+    let onScreen = false, running = false;
+    const sync = () => {
+      const want = onScreen && !document.hidden;
+      if (want !== running) { running = want; (want ? start : stop)(); }
+    };
+    new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; sync(); }).observe(el);
+    document.addEventListener('visibilitychange', sync);
+  }
+  // setInterval that only ticks while `el` is visible.
+  function visibleInterval(el, fn, ms) {
+    let id = 0;
+    whileVisible(el, () => { id = setInterval(fn, ms); }, () => clearInterval(id));
+  }
 
   /* ---------- nav + scroll progress ---------- */
   const nav = $('.nav');
   const bar = $('.scroll-progress');
+  let scrollQueued = false;
   const onScroll = () => {
+    scrollQueued = false;
     const h = document.documentElement;
     const p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
     bar.style.transform = `scaleX(${p})`;
     nav.classList.toggle('scrolled', h.scrollTop > 30);
+    catchUpReveals();
   };
-  addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  addEventListener('scroll', () => {
+    if (!scrollQueued) { scrollQueued = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
 
   const toggle = $('.nav-toggle');
   const links = $('#navLinks');
@@ -28,6 +49,13 @@
     links.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
   }));
+
+  /* ---------- "Get the app": go straight to the right store on phones ---------- */
+  const ua = navigator.userAgent;
+  const store = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)
+    ? 'https://apps.apple.com/in/app/tryb-social-games/id6759920055'
+    : /Android/.test(ua) ? 'https://play.google.com/store/apps/details?id=com.trybsocial.ludo' : null;
+  if (store) Object.assign($('#getApp'), { href: store, target: '_blank', rel: 'noopener' });
 
   /* ---------- cursor glow + magnetic buttons ---------- */
   if (finePointer && !reduce) {
@@ -81,27 +109,36 @@
   }
 
   /* ---------- reveal on scroll ---------- */
+  const pendingReveals = new Set();
+  const reveal = (el) => {
+    if (!pendingReveals.delete(el)) return;
+    el.classList.add('in');
+    $$('[data-scramble]', el).forEach(scramble);
+    if (el.matches('[data-scramble]')) scramble(el);
+    revealIO.unobserve(el);
+  };
   const revealIO = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('in');
-      $$('[data-scramble]', e.target).forEach(scramble);
-      if (e.target.matches('[data-scramble]')) scramble(e.target);
-      revealIO.unobserve(e.target);
-    });
+    entries.forEach((e) => { if (e.isIntersecting) reveal(e.target); });
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  function catchUpReveals() {
+    if (!pendingReveals.size) return;
+    const vh = innerHeight;
+    pendingReveals.forEach((el) => { if (el.getBoundingClientRect().top < vh) reveal(el); });
+  }
   $$('.reveal').forEach((el) => {
     const sibs = [...el.parentElement.children].filter((c) => c.classList.contains('reveal'));
     el.style.setProperty('--d', Math.min(sibs.indexOf(el), 6) * 0.08 + 's');
+    pendingReveals.add(el);
     revealIO.observe(el);
   });
+  onScroll();
 
   /* ---------- rotating hero word ---------- */
   const rot = $('.rotator');
   const words = ['Tryb.', 'squad.', 'rivals.', 'campus.', 'people.'];
   let wi = 0;
   if (!reduce) {
-    setInterval(() => {
+    visibleInterval(rot, () => {
       wi = (wi + 1) % words.length;
       rot.classList.remove('glitching');
       void rot.offsetWidth;
@@ -113,7 +150,7 @@
 
   /* final CTA glitches periodically */
   const finalH = $('.final .glitch');
-  if (!reduce) setInterval(() => {
+  if (!reduce) visibleInterval(finalH, () => {
     finalH.classList.remove('glitching'); void finalH.offsetWidth; finalH.classList.add('glitching');
   }, 3800);
 
@@ -121,80 +158,98 @@
   const canvas = $('#constellation');
   const ctx = canvas.getContext('2d');
   const COLORS = ['#A259FF', '#22D3EE', '#E50695', '#3B82F6', '#FF8A3D'];
-  let W, H, DPR, nodes = [], running = false, mouse = { x: -9999, y: -9999 };
+  const LINK = 130, LINK2 = LINK * LINK, PULL = 180, PULL2 = PULL * PULL;
+  let W = 0, H = 0, nodes = [], running = false, frame = 0, rafId = 0, mouse = { x: -9999, y: -9999 };
+
+  // Pre-rendered glow dots: drawImage is far cheaper than shadowBlur on every node, every frame.
+  const SPRITE = 32;
+  const sprites = Object.fromEntries(COLORS.map((c) => {
+    const s = document.createElement('canvas');
+    s.width = s.height = SPRITE;
+    const g = s.getContext('2d'), m = SPRITE / 2;
+    const grad = g.createRadialGradient(m, m, 0, m, m, m);
+    grad.addColorStop(0, c); grad.addColorStop(0.22, c); grad.addColorStop(0.3, c + '66'); grad.addColorStop(1, c + '00');
+    g.fillStyle = grad; g.fillRect(0, 0, SPRITE, SPRITE);
+    return [c, s];
+  }));
 
   function sizeCanvas() {
-    DPR = Math.min(devicePixelRatio || 1, 2);
-    W = canvas.clientWidth; H = canvas.clientHeight;
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    // Phones fire resize when the URL bar slides; only rebuild when the size really changed.
+    if (w === W && Math.abs(h - H) < 120) return false;
+    W = w; H = h;
+    const DPR = Math.min(devicePixelRatio || 1, coarse ? 1.5 : 2);
     canvas.width = W * DPR; canvas.height = H * DPR;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    const count = Math.round(Math.min(110, Math.max(40, (W * H) / 14000)));
+    const count = Math.round(coarse
+      ? Math.min(45, Math.max(18, (W * H) / 16000))
+      : Math.min(100, Math.max(40, (W * H) / 14000)));
     nodes = Array.from({ length: count }, () => ({
       x: Math.random() * W, y: Math.random() * H,
       vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
       r: Math.random() * 1.8 + 0.8,
       c: COLORS[(Math.random() * COLORS.length) | 0],
     }));
+    return true;
   }
 
   function draw() {
+    if (running && !reduce) rafId = requestAnimationFrame(draw);
+    if (coarse && (frame++ & 1)) return; // 30fps is plenty for a slow drift on phones
     ctx.clearRect(0, 0, W, H);
-    const LINK = 130;
+    const step = coarse ? 2 : 1;
     for (const n of nodes) {
-      if (!reduce) {
-        const dx = mouse.x - n.x, dy = mouse.y - n.y, d = Math.hypot(dx, dy);
-        if (d < 180) { n.vx += dx / d * 0.012; n.vy += dy / d * 0.012; }
-        n.vx *= 0.99; n.vy *= 0.99;
-        n.x += n.vx + (Math.random() - 0.5) * 0.05;
-        n.y += n.vy + (Math.random() - 0.5) * 0.05;
-        if (n.x < 0 || n.x > W) n.vx *= -1;
-        if (n.y < 0 || n.y > H) n.vy *= -1;
-      }
+      if (reduce) break;
+      const dx = mouse.x - n.x, dy = mouse.y - n.y, d2 = dx * dx + dy * dy;
+      if (d2 < PULL2) { const d = Math.sqrt(d2) || 1; n.vx += dx / d * 0.012; n.vy += dy / d * 0.012; }
+      n.vx *= 0.99; n.vy *= 0.99;
+      n.x += (n.vx + (Math.random() - 0.5) * 0.05) * step;
+      n.y += (n.vy + (Math.random() - 0.5) * 0.05) * step;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
     }
+    ctx.lineWidth = 0.7;
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
       for (let j = i + 1; j < nodes.length; j++) {
         const b = nodes[j];
-        const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < LINK) {
+        const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
+        if (d2 < LINK2) {
           ctx.strokeStyle = a.c;
-          ctx.globalAlpha = (1 - d / LINK) * 0.35;
-          ctx.lineWidth = 0.7;
+          ctx.globalAlpha = (1 - Math.sqrt(d2) / LINK) * 0.35;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
       }
-      const md = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-      if (md < 180) {
+      const mx = a.x - mouse.x, my = a.y - mouse.y, md2 = mx * mx + my * my;
+      if (md2 < PULL2) {
         ctx.strokeStyle = '#22D3EE';
-        ctx.globalAlpha = (1 - md / 180) * 0.6;
+        ctx.globalAlpha = (1 - Math.sqrt(md2) / PULL) * 0.6;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
       }
     }
     ctx.globalAlpha = 1;
     for (const n of nodes) {
-      ctx.fillStyle = n.c;
-      ctx.shadowColor = n.c; ctx.shadowBlur = 10;
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
+      const size = n.r * 9;
+      ctx.drawImage(sprites[n.c], n.x - size / 2, n.y - size / 2, size, size);
     }
-    ctx.shadowBlur = 0;
-    if (running && !reduce) requestAnimationFrame(draw);
   }
 
   sizeCanvas();
   draw();
   let resizeT;
-  addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(() => { sizeCanvas(); draw(); }, 150); });
-  const hero = $('.hero');
-  hero.addEventListener('pointermove', (e) => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  addEventListener('resize', () => {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(() => { if (sizeCanvas() && !running) draw(); }, 150);
   });
-  hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
-  new IntersectionObserver(([e]) => {
-    const was = running;
-    running = e.isIntersecting;
-    if (running && !was) draw();
-  }).observe(hero);
+  const hero = $('.hero');
+  if (finePointer) {
+    hero.addEventListener('pointermove', (e) => {
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    });
+    hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
+  }
+  whileVisible(hero, () => { running = true; cancelAnimationFrame(rafId); draw(); }, () => { running = false; cancelAnimationFrame(rafId); });
 
   /* ---------- inbox swipe deck ---------- */
   const DECK = [
@@ -203,7 +258,7 @@
     { c: '#22D3EE', ico: '👋', kind: 'Friend request', t: 'Kabir wants to connect', p: 'You played Mafia together last night.', m: ['2 mutual Trybs'] },
     { c: '#EF4444', ico: '🕵️', kind: 'Challenge', t: "Mafia night in CSE '27", p: 'Someone here is lying. Is it you?', m: ['6/8 joined', 'party'] },
     { c: '#22C55E', ico: '🗳️', kind: 'Campus', t: 'Hostel election closes tonight', p: 'Your vote decides the fest theme.', m: ['412 votes', 'ends 11pm'] },
-    { c: '#E50695', ico: '✨', kind: 'Creator Studio', t: '"Canteen Chaos" just dropped', p: 'A game made by Meera from Mech.', m: ['new', 'made on Tryb'] },
+    { c: '#E50695', ico: '✨', kind: 'Creator Studio', t: '"Canteen Chaos" just dropped', p: 'Meera from Mech described it in one sentence.', m: ['made on Tryb', 'play now'] },
   ];
   const deckEl = $('#deck');
   const yesBtn = $('.act.yes'), noBtn = $('.act.no');
@@ -224,7 +279,7 @@
   layout();
   if (!reduce) {
     let swipeRight = true;
-    setInterval(() => {
+    visibleInterval(deckEl, () => {
       const top = $('.card[data-pos="0"]', deckEl);
       if (!top) return;
       const btn = swipeRight ? yesBtn : noBtn;
@@ -269,6 +324,9 @@
   const STEPS = ['reading your idea', 'designing the rules', 'generating art & sound', 'wiring up multiplayer', 'play-testing'];
   const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
 
+  let termVisible = false, resumeTerm = null;
+  const termReady = () => termVisible ? null : new Promise((r) => { resumeTerm = r; });
+  const pause = async (ms) => { await sleep(ms); await termReady(); };
   async function typeInto(node, text, speed = 28) {
     for (const ch of text) { node.textContent += ch; await sleep(speed + Math.random() * 30); }
   }
@@ -279,19 +337,19 @@
       term.innerHTML = '<span class="dim"># describe your game in plain words</span>\n<span class="p">tryb ›</span> <span class="q"></span><span class="caret"></span>';
       termBar.style.width = '0%';
       await typeInto($('.q', term), '"' + idea + '"');
-      await sleep(500);
+      await pause(500);
       $('.caret', term).remove();
       for (let i = 0; i < STEPS.length; i++) {
         const line = document.createElement('div');
         line.innerHTML = `<span class="dim">[${String(i + 1).padStart(2, '0')}]</span> ${STEPS[i]}<span class="dots"></span>`;
         term.appendChild(line);
         const dots = $('.dots', line);
-        for (let d = 0; d < 3; d++) { dots.textContent += '.'; await sleep(180); }
+        for (let d = 0; d < 3; d++) { dots.textContent += '.'; await pause(180); }
         dots.insertAdjacentHTML('afterend', ' <span class="ok">✓</span>');
         termBar.style.width = ((i + 1) / STEPS.length) * 100 + '%';
       }
       term.insertAdjacentHTML('beforeend', `<span class="ship">${ico} <b>${esc(name)}</b> is ready.\n<span class="dim">▸ play it · ▸ share to campus</span></span>`);
-      await sleep(3800);
+      await pause(3800);
     }
   }
   if (reduce) {
@@ -300,10 +358,12 @@
       `<span class="ship">${IDEAS[0].ico} <b>${esc(IDEAS[0].name)}</b> is ready.</span>`;
     termBar.style.width = '100%';
   } else {
-    const termIO = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { termIO.disconnect(); runTerminal(); }
-    }, { threshold: 0.3 });
-    termIO.observe(term);
+    let started = false;
+    whileVisible(term, () => {
+      termVisible = true;
+      if (resumeTerm) { resumeTerm(); resumeTerm = null; }
+      if (!started) { started = true; runTerminal(); }
+    }, () => { termVisible = false; });
   }
 
   /* ---------- Dept Wars leaderboard (sample data) ---------- */
@@ -338,7 +398,7 @@
   }
   renderBoard();
   if (!reduce) {
-    setInterval(() => {
+    visibleInterval(board, () => {
       const d = DEPTS[(Math.random() * DEPTS.length) | 0];
       d.p += 40 + ((Math.random() * 160) | 0);
       renderBoard(d);
