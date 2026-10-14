@@ -3,26 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tryb — Meet. Play. Belong.</title>
-  <meta name="description" content="Tryb is the anti-feed: real-time multiplayer and party games for your campus and communities. Play Ludo, Mafia, Imposter, Wordle and 150+ more — or create your own game with Creator Studio.">
+  <title>Tryb — Make your own multiplayer games in plain English</title>
+  <meta name="description" content="Describe a game in plain English and play it with your friends in minutes. Tryb's Creator Studio builds the rules, art and real-time multiplayer for you — no code, no dev team, a fraction of the cost. Plus 150+ games built in.">
   <link rel="canonical" href="https://betryb.com/">
   <meta name="theme-color" content="#07080d">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Tryb — Meet. Play. Belong.">
-  <meta property="og:description" content="The anti-feed. Meet people by playing with them — 150+ built-in games, campus Trybs, and games you create yourself.">
+  <meta property="og:title" content="Tryb — Say it. Play it.">
+  <meta property="og:description" content="Make your own multiplayer game in plain English — in minutes, not months. No code, no dev team. Then play it with your campus.">
   <meta property="og:url" content="https://betryb.com/">
   <meta property="og:image" content="https://betryb.com/176111933633483512.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="assets/logo.png">
-  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="assets/logo-96.png" type="image/png" sizes="96x96">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js')</script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
-    {"@type":"Organization","name":"Tryb","url":"https://betryb.com/","logo":"https://betryb.com/176111933633483512.png","email":"akhil@betryb.com","founder":{"@type":"Person","name":"Akhil KT","alumniOf":"IIT Madras"},"sameAs":["https://www.instagram.com/_betryb/"]},
-    {"@type":"MobileApplication","name":"Tryb","operatingSystem":"Android, iOS","applicationCategory":"GameApplication","description":"Social gaming for communities: real-time multiplayer and party games, campus Trybs, and AI-built games from Creator Studio."}
+    {"@type":"Organization","name":"Tryb","url":"https://betryb.com/","logo":"https://betryb.com/176111933633483512.png","email":"akhil@betryb.com","sameAs":["https://www.instagram.com/_betryb/"]},
+    {"@type":"MobileApplication","name":"Tryb","operatingSystem":"Android, iOS","applicationCategory":"GameApplication","description":"Make multiplayer games in plain English with Creator Studio: describe a game and Tryb builds the rules, art and real-time multiplayer in minutes, no code needed. Plus 150+ built-in games and campus communities.","installUrl":["https://apps.apple.com/in/app/tryb-social-games/id6759920055","https://play.google.com/store/apps/details?id=com.trybsocial.ludo"],"sameAs":["https://apps.apple.com/in/app/tryb-social-games/id6759920055","https://play.google.com/store/apps/details?id=com.trybsocial.ludo"]}
   ]}
   </script>
 </head>
@@ -32,17 +34,16 @@
 
   <header class="nav" id="top">
     <a class="brand" href="#top" aria-label="Tryb home">
-      <img src="assets/logo.png" alt="" width="34" height="34">
+      <img src="assets/logo-96.webp" alt="" width="34" height="34" fetchpriority="high">
       <span>tryb</span>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
-      <a href="#loop">The Loop</a>
+      <a href="#create" class="nav-hot">Create a game</a>
       <a href="#arena">Games</a>
-      <a href="#studio">Creator Studio</a>
+      <a href="#loop">The Loop</a>
       <a href="#campus">Campus</a>
-      <a href="#ambassador">Ambassadors</a>
     </nav>
-    <a class="btn btn-sm btn-neon magnetic" href="https://form.typeform.com/to/kkKh81V1?utm_source=site&utm_medium=nav" target="_blank" rel="noopener">Join waitlist</a>
+    <a class="btn btn-sm btn-neon magnetic" id="getApp" href="#download">Get the app</a>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
   </header>
 
@@ -53,12 +54,12 @@
       <div class="grid-floor" aria-hidden="true"></div>
       <div class="hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow mono"><span class="dot"></span> Early access · campus by campus</p>
+          <p class="eyebrow mono"><span class="dot"></span> Out now on iPhone &amp; Android</p>
           <h1 id="hero-title">Find your<br><span class="rotator glitch" data-text="Tryb.">Tryb.</span></h1>
           <p class="lead">The anti-feed. No profiles, no swiping, no endless scroll — you meet people by <strong>playing</strong> with them. Real-time games, campus Trybs, and games you invent yourself.</p>
-          <div class="cta-row">
-            <a class="btn btn-neon magnetic" href="https://form.typeform.com/to/kkKh81V1?utm_source=site&utm_medium=hero" target="_blank" rel="noopener">Join the waitlist <span aria-hidden="true">→</span></a>
-            <a class="btn btn-ghost magnetic" href="#ambassador">Become an ambassador</a>
+          <div class="store-row">
+            <a class="store-badge magnetic" href="https://apps.apple.com/in/app/tryb-social-games/id6759920055" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span><small>Download on the</small>App Store</span></a>
+            <a class="store-badge magnetic" href="https://play.google.com/store/apps/details?id=com.trybsocial.ludo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></svg><span><small>Get it on</small>Google Play</span></a>
           </div>
           <p class="mono micro">MEET <i>/</i> PLAY <i>/</i> BELONG</p>
         </div>
@@ -86,21 +87,88 @@
           <div class="float-chip c3 mono" aria-hidden="true">🏆 +120 XP</div>
         </div>
       </div>
-      <a class="scroll-cue mono" href="#loop" aria-label="Scroll down"><span></span>scroll</a>
+      <a class="scroll-cue mono" href="#create" aria-label="Scroll down"><span></span>scroll</a>
+    </section>
+
+    <!-- CREATE: the USP -->
+    <section class="section studio" id="create" aria-labelledby="create-title">
+      <div class="section-head reveal">
+        <p class="kicker mono">// 01 — creator studio</p>
+        <h2 id="create-title">Invent a game.<br><span class="grad-text">Play it in minutes.</span></h2>
+        <p class="sub lead-sub"><strong>Make your own multiplayer game in plain English</strong> — no code, no dev team, a fraction of the cost.</p>
+        <p class="sub">Got an inside joke, a hostel ritual, a game only your group would get? Describe it the way you'd explain it to a friend. Creator Studio designs the rules, draws the art, wires up real-time multiplayer and play-tests it, so your whole campus can play it the same day.</p>
+      </div>
+      <div class="studio-grid">
+        <div class="terminal reveal" aria-label="Creator Studio demo">
+          <div class="term-bar"><i></i><i></i><i></i><span class="mono">creator-studio</span></div>
+          <div class="term-body mono" id="term" aria-live="off"></div>
+          <div class="term-progress"><span id="termBar"></span></div>
+        </div>
+        <ol class="steps reveal">
+          <li><span class="mono">01</span><div><h3>Describe it</h3><p>In plain English. No code, no templates, no game-design jargon.</p></div></li>
+          <li><span class="mono">02</span><div><h3>Play-test it</h3><p>Try it yourself, then change anything just by asking.</p></div></li>
+          <li><span class="mono">03</span><div><h3>Share it</h3><p>Send it to your Tryb. Multiplayer is already built in.</p></div></li>
+        </ol>
+      </div>
+
+      <div class="compare reveal" role="table" aria-label="Building a game the old way compared with Tryb">
+        <div class="cmp-row cmp-head" role="row">
+          <span role="columnheader"></span>
+          <span role="columnheader" class="old">The old way</span>
+          <span role="columnheader" class="new">With Tryb</span>
+        </div>
+        <div class="cmp-row" role="row"><span role="rowheader">Time to play</span><span role="cell" class="old">Months of development</span><span role="cell" class="new">Minutes</span></div>
+        <div class="cmp-row" role="row"><span role="rowheader">Who builds it</span><span role="cell" class="old">Developers, designers, a server engineer</span><span role="cell" class="new">Just you</span></div>
+        <div class="cmp-row" role="row"><span role="rowheader">Skills needed</span><span role="cell" class="old">Code, art, game design</span><span role="cell" class="new">Plain English</span></div>
+        <div class="cmp-row" role="row"><span role="rowheader">Cost</span><span role="cell" class="old">Lakhs on salaries, art and servers</span><span role="cell" class="new">A fraction of the cost</span></div>
+        <div class="cmp-row" role="row"><span role="rowheader">Multiplayer</span><span role="cell" class="old">Build and run your own backend</span><span role="cell" class="new">Built in, real-time</span></div>
+        <div class="cmp-row" role="row"><span role="rowheader">Players</span><span role="cell" class="old">Fight for app-store installs</span><span role="cell" class="new">Your campus, one tap away</span></div>
+      </div>
+
+      <div class="create-cta reveal">
+        <p class="mono">Make your first game today. It's in the app.</p>
+        <div class="store-row center">
+          <a class="store-badge magnetic" href="https://apps.apple.com/in/app/tryb-social-games/id6759920055" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span><small>Download on the</small>App Store</span></a>
+          <a class="store-badge magnetic" href="https://play.google.com/store/apps/details?id=com.trybsocial.ludo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></svg><span><small>Get it on</small>Google Play</span></a>
+        </div>
+      </div>
     </section>
 
     <!-- TICKER -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
-        <span>LUDO</span><b>✦</b><span>MAFIA</span><b>✦</b><span>IMPOSTER</span><b>✦</b><span>WORDLE</span><b>✦</b><span>WOULD YOU RATHER</span><b>✦</b><span>HANGMAN</span><b>✦</b><span>SHIP FIGHT</span><b>✦</b><span>RED FLAG / GREEN FLAG</span><b>✦</b><span>EMOJI GUESS</span><b>✦</b><span>WHO'S MOST LIKELY TO</span><b>✦</b><span>ELECTIONS</span><b>✦</b><span>DEPT WARS</span><b>✦</b>
-        <span>LUDO</span><b>✦</b><span>MAFIA</span><b>✦</b><span>IMPOSTER</span><b>✦</b><span>WORDLE</span><b>✦</b><span>WOULD YOU RATHER</span><b>✦</b><span>HANGMAN</span><b>✦</b><span>SHIP FIGHT</span><b>✦</b><span>RED FLAG / GREEN FLAG</span><b>✦</b><span>EMOJI GUESS</span><b>✦</b><span>WHO'S MOST LIKELY TO</span><b>✦</b><span>ELECTIONS</span><b>✦</b><span>DEPT WARS</span><b>✦</b>
+        <span class="you">YOUR GAME HERE</span><b>✦</b><span>LUDO</span><b>✦</b><span>MAFIA</span><b>✦</b><span>IMPOSTER</span><b>✦</b><span>WORDLE</span><b>✦</b><span>WOULD YOU RATHER</span><b>✦</b><span>HANGMAN</span><b>✦</b><span>SHIP FIGHT</span><b>✦</b><span>RED FLAG / GREEN FLAG</span><b>✦</b><span>EMOJI GUESS</span><b>✦</b><span>WHO'S MOST LIKELY TO</span><b>✦</b><span>ELECTIONS</span><b>✦</b><span>DEPT WARS</span><b>✦</b>
+        <span class="you">YOUR GAME HERE</span><b>✦</b><span>LUDO</span><b>✦</b><span>MAFIA</span><b>✦</b><span>IMPOSTER</span><b>✦</b><span>WORDLE</span><b>✦</b><span>WOULD YOU RATHER</span><b>✦</b><span>HANGMAN</span><b>✦</b><span>SHIP FIGHT</span><b>✦</b><span>RED FLAG / GREEN FLAG</span><b>✦</b><span>EMOJI GUESS</span><b>✦</b><span>WHO'S MOST LIKELY TO</span><b>✦</b><span>ELECTIONS</span><b>✦</b><span>DEPT WARS</span><b>✦</b>
       </div>
     </div>
+
+    <!-- ARENA -->
+    <section class="section arena" id="arena" aria-labelledby="arena-title">
+      <div class="section-head reveal">
+        <p class="kicker mono">// 02 — the arena</p>
+        <h2 id="arena-title" data-scramble>Not feeling creative? Start here.</h2>
+        <p class="sub">150+ games built in, from the classics to party chaos. Real-time, made for groups of friends — or friends you haven't met yet. Play one tonight, then make your own tomorrow.</p>
+      </div>
+      <div class="cards" id="gameCards">
+        <article class="game tilt reveal" style="--c1:#A259FF;--c2:#E50695"><div class="g-ico">🎲</div><h3>Ludo</h3><p>The classic, live. Four friends, one board, zero mercy.</p><span class="tag mono">real-time</span></article>
+        <article class="game tilt reveal" style="--c1:#EF4444;--c2:#A259FF"><div class="g-ico">🕵️</div><h3>Mafia</h3><p>Night falls on the hostel. Find the killer before they find you.</p><span class="tag mono">party</span></article>
+        <article class="game tilt reveal" style="--c1:#E50695;--c2:#FF8A3D"><div class="g-ico">🎭</div><h3>Imposter</h3><p>Everyone knows the word but one. Talk your way out.</p><span class="tag mono">party</span></article>
+        <article class="game tilt reveal" style="--c1:#22C55E;--c2:#22D3EE"><div class="g-ico">🟩</div><h3>Wordle Challenges</h3><p>Set a word, dare your Tryb, climb the leaderboard.</p><span class="tag mono">async</span></article>
+        <article class="game tilt reveal" style="--c1:#3B82F6;--c2:#A259FF"><div class="g-ico">⚖️</div><h3>Would You Rather</h3><p>Impossible choices. Brutally honest results.</p><span class="tag mono">party</span></article>
+        <article class="game tilt reveal" style="--c1:#FFD700;--c2:#FF8A3D"><div class="g-ico">👉</div><h3>Who's Most Likely To</h3><p>The vote that decides who's buying chai.</p><span class="tag mono">party</span></article>
+        <article class="game tilt reveal" style="--c1:#22D3EE;--c2:#3B82F6"><div class="g-ico">🚀</div><h3>Ship Fight</h3><p>Pure tap speed. Two thumbs, one winner.</p><span class="tag mono">real-time</span></article>
+        <article class="game tilt reveal" style="--c1:#EF4444;--c2:#22C55E"><div class="g-ico">🚩</div><h3>Red Flag / Green Flag</h3><p>Call it. Defend it. Get roasted for it.</p><span class="tag mono">real-time</span></article>
+        <article class="game tilt reveal" style="--c1:#A259FF;--c2:#22D3EE"><div class="g-ico">🪢</div><h3>Hangman</h3><p>Race your friends letter by letter — no peeking.</p><span class="tag mono">async</span></article>
+        <article class="game tilt reveal" style="--c1:#FF8A3D;--c2:#E50695"><div class="g-ico">😎</div><h3>Emoji Guess</h3><p>Movies, songs, memes — decoded from emoji.</p><span class="tag mono">real-time</span></article>
+        <article class="game tilt reveal" style="--c1:#3B82F6;--c2:#22C55E"><div class="g-ico">🗳️</div><h3>Elections &amp; Polls</h3><p>Run your club, hostel or class vote in one tap.</p><span class="tag mono">community</span></article>
+        <article class="game tilt reveal" style="--c1:#E50695;--c2:#3B82F6"><div class="g-ico">❌</div><h3>Tic Tac Toe</h3><p>Ninety-second grudge matches between classes.</p><span class="tag mono">real-time</span></article>
+      </div>
+    </section>
 
     <!-- LOOP -->
     <section class="section loop" id="loop" aria-labelledby="loop-title">
       <div class="section-head reveal">
-        <p class="kicker mono">// 01 — the tryb loop</p>
+        <p class="kicker mono">// 03 — the tryb loop</p>
         <h2 id="loop-title" data-scramble>Meet. Play. Belong.</h2>
         <p class="sub">Belonging comes from doing things together, not from scrolling past each other. Every connection on Tryb starts with something to <em>do</em>.</p>
       </div>
@@ -132,57 +200,13 @@
           <article class="glass reveal" style="--accent:#A259FF">
             <span class="num mono">02</span>
             <h3>Play</h3>
-            <p>Jump into real-time matches, party games and daily challenges. Short, low-pressure, and way more fun than "hey".</p>
+            <p>Jump into real-time matches, party games, daily challenges, or the game you made five minutes ago. Way more fun than "hey".</p>
           </article>
           <article class="glass reveal" style="--accent:#FF8A3D">
             <span class="num mono">03</span>
             <h3>Belong</h3>
             <p>Rivalries become rituals. Rituals become your Tryb — with leagues, elections, chat and an inbox that's a deck, not a feed.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ARENA -->
-    <section class="section arena" id="arena" aria-labelledby="arena-title">
-      <div class="section-head reveal">
-        <p class="kicker mono">// 02 — the arena</p>
-        <h2 id="arena-title" data-scramble>Your group chat, but you actually do something.</h2>
-        <p class="sub">150+ games built in. Real-time, server-authoritative, and made for groups of friends — or friends you haven't met yet.</p>
-      </div>
-      <div class="cards" id="gameCards">
-        <article class="game tilt reveal" style="--c1:#A259FF;--c2:#E50695"><div class="g-ico">🎲</div><h3>Ludo</h3><p>The classic, live. Four friends, one board, zero mercy.</p><span class="tag mono">real-time</span></article>
-        <article class="game tilt reveal" style="--c1:#EF4444;--c2:#A259FF"><div class="g-ico">🕵️</div><h3>Mafia</h3><p>Night falls on the hostel. Find the killer before they find you.</p><span class="tag mono">party</span></article>
-        <article class="game tilt reveal" style="--c1:#E50695;--c2:#FF8A3D"><div class="g-ico">🎭</div><h3>Imposter</h3><p>Everyone knows the word but one. Talk your way out.</p><span class="tag mono">party</span></article>
-        <article class="game tilt reveal" style="--c1:#22C55E;--c2:#22D3EE"><div class="g-ico">🟩</div><h3>Wordle Challenges</h3><p>Set a word, dare your Tryb, climb the leaderboard.</p><span class="tag mono">async</span></article>
-        <article class="game tilt reveal" style="--c1:#3B82F6;--c2:#A259FF"><div class="g-ico">⚖️</div><h3>Would You Rather</h3><p>Impossible choices. Brutally honest results.</p><span class="tag mono">party</span></article>
-        <article class="game tilt reveal" style="--c1:#FFD700;--c2:#FF8A3D"><div class="g-ico">👉</div><h3>Who's Most Likely To</h3><p>The vote that decides who's buying chai.</p><span class="tag mono">party</span></article>
-        <article class="game tilt reveal" style="--c1:#22D3EE;--c2:#3B82F6"><div class="g-ico">🚀</div><h3>Ship Fight</h3><p>Pure tap speed. Two thumbs, one winner.</p><span class="tag mono">real-time</span></article>
-        <article class="game tilt reveal" style="--c1:#EF4444;--c2:#22C55E"><div class="g-ico">🚩</div><h3>Red Flag / Green Flag</h3><p>Call it. Defend it. Get roasted for it.</p><span class="tag mono">real-time</span></article>
-        <article class="game tilt reveal" style="--c1:#A259FF;--c2:#22D3EE"><div class="g-ico">🪢</div><h3>Hangman</h3><p>Race your friends letter by letter — no peeking.</p><span class="tag mono">async</span></article>
-        <article class="game tilt reveal" style="--c1:#FF8A3D;--c2:#E50695"><div class="g-ico">😎</div><h3>Emoji Guess</h3><p>Movies, songs, memes — decoded from emoji.</p><span class="tag mono">real-time</span></article>
-        <article class="game tilt reveal" style="--c1:#3B82F6;--c2:#22C55E"><div class="g-ico">🗳️</div><h3>Elections &amp; Polls</h3><p>Run your club, hostel or class vote in one tap.</p><span class="tag mono">community</span></article>
-        <article class="game tilt reveal" style="--c1:#E50695;--c2:#3B82F6"><div class="g-ico">❌</div><h3>Tic Tac Toe</h3><p>Ninety-second grudge matches between classes.</p><span class="tag mono">real-time</span></article>
-      </div>
-    </section>
-
-    <!-- STUDIO -->
-    <section class="section studio" id="studio" aria-labelledby="studio-title">
-      <div class="studio-grid">
-        <div class="reveal">
-          <p class="kicker mono">// 03 — creator studio</p>
-          <h2 id="studio-title" data-scramble>Type a game. Play it in minutes.</h2>
-          <p class="sub">Got an inside joke? Turn it into a game. Describe it in plain words — Creator Studio designs the rules, draws the art, play-tests it, and you share it with your whole campus.</p>
-          <ul class="checks">
-            <li>No code. Just an idea.</li>
-            <li>Edit any page by asking for changes.</li>
-            <li>Play it yourself, then ship it to your Tryb.</li>
-          </ul>
-        </div>
-        <div class="terminal reveal" aria-label="Creator Studio demo">
-          <div class="term-bar"><i></i><i></i><i></i><span class="mono">creator-studio</span></div>
-          <div class="term-body mono" id="term" aria-live="off"></div>
-          <div class="term-progress"><span id="termBar"></span></div>
         </div>
       </div>
     </section>
@@ -214,67 +238,30 @@
 
     <!-- STATS -->
     <section class="stats" aria-label="Tryb in numbers">
+      <div class="stat reveal"><b>∞</b><span>games you can make</span></div>
+      <div class="stat reveal"><b data-count="0">0</b><span>lines of code</span></div>
       <div class="stat reveal"><b data-count="150" data-suffix="+">0</b><span>games built in</span></div>
-      <div class="stat reveal"><b>∞</b><span>games made by players</span></div>
-      <div class="stat reveal"><b data-count="1">0</b><span>tap to challenge a friend</span></div>
       <div class="stat reveal"><b data-count="0">0</b><span>faces to swipe on</span></div>
     </section>
 
-    <!-- FOUNDER -->
-    <section class="section founder" id="founder" aria-labelledby="founder-title">
-      <div class="founder-grid">
-        <div class="founder-photo reveal">
-          <picture>
-            <source type="image/webp" srcset="assets/akhil.webp 1x, assets/akhil@2x.webp 2x">
-            <img src="assets/akhil.jpg" alt="Akhil KT, Founder and CEO of Tryb" loading="lazy" decoding="async" width="432" height="592">
-          </picture>
-          <div class="photo-frame" aria-hidden="true"></div>
-        </div>
-        <div class="reveal">
-          <p class="kicker mono">// 05 — built by people who scaled play</p>
-          <h2 id="founder-title" data-scramble>Meet the founder.</h2>
-          <p class="sub"><strong>Akhil KT</strong>, Founder &amp; CEO, is a dual-degree graduate of IIT Madras with nearly a decade building and scaling digital products across gaming, fintech and B2B commerce.</p>
-          <p class="sub">Before Tryb he led product strategy and growth at <strong>Gameberry Labs</strong> (creators of Ludo Star and Jackaroo), Bzaar.com and Thrive — products used by millions worldwide.</p>
-          <blockquote class="quote">"Make online interactions feel genuine again — built around play, discovery and belonging."</blockquote>
-          <div class="cta-row">
-            <a class="btn btn-ghost magnetic" href="https://www.linkedin.com/in/akhil-kt-41bbba3b/" target="_blank" rel="noopener">Connect on LinkedIn</a>
-            <a class="btn btn-ghost magnetic" href="mailto:akhil@betryb.com">akhil@betryb.com</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AMBASSADOR -->
-    <section class="section ambassador" id="ambassador" aria-labelledby="amb-title">
-      <div class="amb-card reveal">
-        <div class="amb-glow" aria-hidden="true"></div>
-        <p class="kicker mono">// 06 — campus ambassadors</p>
-        <h2 id="amb-title" data-scramble>Be the face of Tryb on your campus.</h2>
-        <p class="sub">Love building communities? Launch Tryb at your college, run Dept Wars, host game nights — and get perks for it.</p>
-        <ul class="perks">
-          <li><span>⚡</span>Early access before anyone else</li>
-          <li><span>🎁</span>Exclusive merch &amp; perks</li>
-          <li><span>🏆</span>Run your campus leaderboard</li>
-          <li><span>🚀</span>Work directly with the founding team</li>
-        </ul>
-        <a class="btn btn-neon btn-lg magnetic" href="https://form.typeform.com/to/M17a3VY4?utm_source=site&utm_medium=ambassador" target="_blank" rel="noopener">Apply now <span aria-hidden="true">→</span></a>
-      </div>
-    </section>
-
     <!-- FINAL CTA -->
-    <section class="final" aria-labelledby="final-title">
+    <section class="final" id="download" aria-labelledby="final-title">
       <h2 id="final-title" class="glitch" data-text="Find your Tryb.">Find your Tryb.</h2>
-      <p class="sub">Doors open campus by campus. Get on the list.</p>
-      <a class="btn btn-neon btn-lg magnetic" href="https://form.typeform.com/to/kkKh81V1?utm_source=site&utm_medium=footer" target="_blank" rel="noopener">Join the waitlist <span aria-hidden="true">→</span></a>
+      <p class="sub">Tryb is live on iPhone and Android. Download it, type your first game, and bring your people.</p>
+      <div class="store-row center big">
+        <a class="store-badge magnetic" href="https://apps.apple.com/in/app/tryb-social-games/id6759920055" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span><small>Download on the</small>App Store</span></a>
+        <a class="store-badge magnetic" href="https://play.google.com/store/apps/details?id=com.trybsocial.ludo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></svg><span><small>Get it on</small>Google Play</span></a>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    <a class="brand" href="#top"><img src="assets/logo.png" alt="" width="28" height="28"><span>tryb</span></a>
-    <p class="mono">© 2026 Tryb. Meet. Play. Belong.</p>
+    <a class="brand" href="#top"><img src="assets/logo-96.webp" alt="" width="28" height="28" loading="lazy"><span>tryb</span></a>
+    <p class="mono">© 2026 Tryb. Say it. Play it.</p>
     <nav aria-label="Social">
+      <a href="https://apps.apple.com/in/app/tryb-social-games/id6759920055" target="_blank" rel="noopener">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.trybsocial.ludo" target="_blank" rel="noopener">Google Play</a>
       <a href="https://www.instagram.com/_betryb/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.linkedin.com/in/akhil-kt-41bbba3b/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="mailto:akhil@betryb.com">Email</a>
     </nav>
   </footer>
